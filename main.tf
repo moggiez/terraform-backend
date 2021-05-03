@@ -8,12 +8,14 @@ terraform {
 
 provider "aws" {
   region     = var.region
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
+}
+
+locals {
+  backends = toset(["moggies.io-storage", "moggies.io-api", "moggies.io-webui", "moggies.io-load-generator"])
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "${var.backend_name}-terraform-state-backend"
+  bucket = "moggies.io-terraform-state-backend"
   versioning {
     enabled = true
   }
@@ -42,7 +44,8 @@ resource "aws_s3_bucket_public_access_block" "backend_bucket_block_public_access
 }
 
 resource "aws_dynamodb_table" "terraform-lock" {
-  name           = "${var.backend_name}-terraform_state"
+  for_each       = local.backends
+  name           = "${each.value}-terraform_state"
   read_capacity  = 5
   write_capacity = 5
   hash_key       = "LockID"
