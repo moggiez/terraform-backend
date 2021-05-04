@@ -7,11 +7,11 @@ terraform {
 }
 
 provider "aws" {
-  region     = var.region
+  region = var.region
 }
 
 locals {
-  backends = toset(["moggies.io-storage", "moggies.io-api", "moggies.io-webui", "moggies.io-load-generator"])
+  backends = toset(["moggies.io-storage", "moggies.io-api", "moggies.io-webui", "moggies.io-load-generator", "moggies.io-auth"])
 }
 
 resource "aws_s3_bucket" "bucket" {
