@@ -11,7 +11,14 @@ provider "aws" {
 }
 
 locals {
-  backends = toset(["moggies.io-storage", "moggies.io-api", "moggies.io-webui", "moggies.io-load-generator", "moggies.io-auth"])
+  backends = toset([
+    "moggies.io-storage",
+    "moggies.io-api",
+    "moggies.io-webui",
+    "moggies.io-load-generator",
+    "moggies.io-auth",
+    "moggies.io-waypoint-server"
+  ])
 }
 
 resource "aws_s3_bucket" "bucket" {
