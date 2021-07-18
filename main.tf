@@ -17,7 +17,9 @@ locals {
     "moggies.io-webui",
     "moggies.io-load-generator",
     "moggies.io-auth",
-    "moggies.io-waypoint-server"
+    "moggies.io-waypoint-server",
+
+    "moggies.io-playbooks-api"
   ])
 }
 
