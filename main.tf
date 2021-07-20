@@ -19,7 +19,8 @@ locals {
     "moggies.io-auth",
     "moggies.io-waypoint-server",
 
-    "moggies.io-playbooks-api"
+    "moggies.io-playbooks-api",
+    "moggies.io-users-api"
   ])
 }
 
