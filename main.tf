@@ -20,7 +20,8 @@ locals {
     "moggies.io-waypoint-server",
 
     "moggies.io-playbooks-api",
-    "moggies.io-users-api"
+    "moggies.io-users-api",
+    "moggies.io-domains-api"
   ])
 }
 
