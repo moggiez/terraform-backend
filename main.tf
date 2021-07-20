@@ -17,11 +17,13 @@ locals {
     "moggies.io-webui",
     "moggies.io-load-generator",
     "moggies.io-auth",
-    "moggies.io-waypoint-server",
 
     "moggies.io-playbooks-api",
     "moggies.io-users-api",
-    "moggies.io-domains-api"
+    "moggies.io-domains-api",
+    "moggies.io-loadtests-api",
+    "moggies.io-metrics-api",
+    "moggies.io-organisation-api"
   ])
 }
 
