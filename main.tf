@@ -68,5 +68,26 @@ resource "aws_dynamodb_table" "terraform-lock" {
   }
   tags = {
     "Name" = "DynamoDB Terraform State Lock Table"
+    "DDBTableGroupKey-tf-backend" = "tf-backend"
+  }
+}
+
+resource "aws_resourcegroups_group" "tf_backend" {
+  name = "tf-backend"
+
+  resource_query {
+    query = <<JSON
+{
+  "ResourceTypeFilters": [
+    "AWS::DynamoDB::Table"
+  ],
+  "TagFilters": [
+    {
+      "Key": "DDBTableGroupKey-tf-backend",
+      "Values": ["tf-backend"]
+    }
+  ]
+}
+JSON
   }
 }
