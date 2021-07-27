@@ -13,7 +13,6 @@ provider "aws" {
 locals {
   backends = toset([
     "moggies.io-storage",
-    "moggies.io-api",
     "moggies.io-webui",
     "moggies.io-load-generator",
     "moggies.io-auth",
@@ -23,7 +22,7 @@ locals {
     "moggies.io-domains-api",
     "moggies.io-loadtests-api",
     "moggies.io-metrics-api",
-    "moggies.io-organisations-api"
+    "moggies.io-organisations-api",
   ])
 }
 
@@ -67,7 +66,7 @@ resource "aws_dynamodb_table" "terraform-lock" {
     type = "S"
   }
   tags = {
-    "Name" = "DynamoDB Terraform State Lock Table"
+    "Name"                        = "DynamoDB Terraform State Lock Table"
     "DDBTableGroupKey-tf-backend" = "tf-backend"
   }
 }
