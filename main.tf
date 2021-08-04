@@ -23,6 +23,7 @@ locals {
     "moggies.io-loadtests-api",
     "moggies.io-metrics-api",
     "moggies.io-organisations-api",
+    "moggies.io-jobs-api",
   ])
 }
 
