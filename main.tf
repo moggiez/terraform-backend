@@ -24,6 +24,7 @@ locals {
     "moggies.io-metrics-api",
     "moggies.io-organisations-api",
     "moggies.io-jobs-api",
+    "moggies.io-driver-api",
   ])
 }
 
