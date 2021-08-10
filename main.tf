@@ -25,6 +25,7 @@ locals {
     "moggies.io-organisations-api",
     "moggies.io-jobs-api",
     "moggies.io-driver-api",
+    "moggies.io-http_worker"
   ])
 }
 
