@@ -30,7 +30,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "moggies.io-terraform-state-backend"
+  bucket = "${var.namespace}-terraform-state-backend"
   versioning {
     enabled = true
   }
