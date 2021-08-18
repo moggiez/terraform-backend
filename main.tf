@@ -12,25 +12,25 @@ provider "aws" {
 
 locals {
   backends = toset([
-    "moggies.io-storage",
-    "moggies.io-webui",
-    "moggies.io-load-generator",
-    "moggies.io-auth",
+    "storage",
+    "webui",
+    "load-generator",
+    "auth",
 
-    "moggies.io-playbooks-api",
-    "moggies.io-users-api",
-    "moggies.io-domains-api",
-    "moggies.io-loadtests-api",
-    "moggies.io-metrics-api",
-    "moggies.io-organisations-api",
-    "moggies.io-jobs-api",
-    "moggies.io-driver-api",
-    "moggies.io-http_worker"
+    "playbooks-api",
+    "users-api",
+    "domains-api",
+    "loadtests-api",
+    "metrics-api",
+    "organisations-api",
+    "jobs-api",
+    "driver-api",
+    "http_worker"
   ])
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "moggies.io-terraform-state-backend"
+  bucket = "${var.namespace}-terraform-state-backend"
   versioning {
     enabled = true
   }
@@ -60,7 +60,7 @@ resource "aws_s3_bucket_public_access_block" "backend_bucket_block_public_access
 
 resource "aws_dynamodb_table" "terraform-lock" {
   for_each       = local.backends
-  name           = "${each.value}-terraform_state"
+  name           = "${var.namespace}-${each.value}-terraform_state"
   read_capacity  = 5
   write_capacity = 5
   hash_key       = "LockID"
