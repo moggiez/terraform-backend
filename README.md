@@ -13,6 +13,6 @@ Terraform backend makes sure many developers could work on a project simultaneou
 
 ## Deploy backends
 
-- Run `source ./scripts/gen-tf-config.sh` to generate the terraform backend configuration
+- Run `source ./scripts/gen-tf-config.sh` to generate the terraform backend configuration (provide `moggies.io` for namespace by default)
 
-- Run `make deploy` and provide the `namespace` for the backends (could be the same as the meta backend name or different)
+- Run `make deploy` and provide the `namespace` for the backends if asked to
