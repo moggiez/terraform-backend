@@ -4,35 +4,14 @@ terraform {
       source = "hashicorp/aws"
     }
   }
-
-  backend "s3" {}
 }
 
 provider "aws" {
   region = var.region
 }
 
-locals {
-  backends = toset([
-    "storage",
-    "webui",
-    "load-generator",
-    "auth",
-
-    "playbooks-api",
-    "users-api",
-    "domains-api",
-    "loadtests-api",
-    "metrics-api",
-    "organisations-api",
-    "jobs-api",
-    "driver-api",
-    "http_worker"
-  ])
-}
-
 resource "aws_s3_bucket" "bucket" {
-  bucket = "${var.namespace}-terraform-state-backend"
+  bucket = "${var.namespace}-meta-terraform-state-backend"
   versioning {
     enabled = true
   }
@@ -61,8 +40,7 @@ resource "aws_s3_bucket_public_access_block" "backend_bucket_block_public_access
 }
 
 resource "aws_dynamodb_table" "terraform-lock" {
-  for_each       = local.backends
-  name           = "${var.namespace}-${each.value}-terraform_state"
+  name           = "${var.namespace}-meta-terraform_state"
   read_capacity  = 5
   write_capacity = 5
   hash_key       = "LockID"
@@ -72,26 +50,5 @@ resource "aws_dynamodb_table" "terraform-lock" {
   }
   tags = {
     "Name"                        = "DynamoDB Terraform State Lock Table"
-    "DDBTableGroupKey-tf-backend" = "tf-backend"
-  }
-}
-
-resource "aws_resourcegroups_group" "tf_backend" {
-  name = "tf-backend"
-
-  resource_query {
-    query = <<JSON
-{
-  "ResourceTypeFilters": [
-    "AWS::DynamoDB::Table"
-  ],
-  "TagFilters": [
-    {
-      "Key": "DDBTableGroupKey-tf-backend",
-      "Values": ["tf-backend"]
-    }
-  ]
-}
-JSON
   }
 }
