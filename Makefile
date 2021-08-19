@@ -1,8 +1,10 @@
 init:
-	terraform init
+	terraform init -force-copy -backend-config=./tf_backend.cfg
 fmt:
 	terraform fmt
-preview:
-	terraform init && terraform plan
-deploy:
-	terraform init && terraform apply -auto-approve
+preview: init
+	terraform plan
+deploy: init
+	terraform apply -auto-approve 
+deploy-meta-backend:
+	cd meta-backend && terraform init && terraform apply -auto-approve
