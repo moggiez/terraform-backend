@@ -27,7 +27,9 @@ locals {
     "organisations-api",
     "jobs-api",
     "driver-api",
-    "http_worker"
+    "http_worker",
+    "http_worker_result_archiver",
+    "metrics_saver_scheduled"
   ])
 }
 
