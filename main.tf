@@ -29,7 +29,8 @@ locals {
     "driver-api",
     "http_worker",
     "http_worker_result_archiver",
-    "metrics_saver_scheduled"
+    "metrics_saver_scheduled",
+    "domain_validator"
   ])
 }
 
